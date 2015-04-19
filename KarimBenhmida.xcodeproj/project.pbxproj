@@ -40,6 +40,7 @@
 		8A97D1E11AE43D030083CF51 /* KarimBenhmidaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KarimBenhmidaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A97D1E61AE43D030083CF51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A97D1E71AE43D030083CF51 /* KarimBenhmidaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KarimBenhmidaTests.swift; sourceTree = "<group>"; };
+		8A97D1F11AE44ADC0083CF51 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +108,7 @@
 				8A97D1D81AE43D030083CF51 /* Images.xcassets */,
 				8A97D1DA1AE43D030083CF51 /* LaunchScreen.xib */,
 				8A97D1CF1AE43D030083CF51 /* Supporting Files */,
+				8A97D1F11AE44ADC0083CF51 /* BridgingHeader.h */,
 			);
 			path = KarimBenhmida;
 			sourceTree = "<group>";
@@ -403,6 +405,7 @@
 				INFOPLIST_FILE = KarimBenhmida/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = KarimBenhmida/BridgingHeader.h;
 			};
 			name = Debug;
 		};
@@ -414,6 +417,7 @@
 				INFOPLIST_FILE = KarimBenhmida/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = KarimBenhmida/BridgingHeader.h;
 			};
 			name = Release;
 		};

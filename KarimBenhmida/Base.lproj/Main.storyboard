@@ -32,10 +32,42 @@
                     </view>
                     <connections>
                         <outlet property="appLogo" destination="hOF-m9-kq9" id="pur-oV-D0X"/>
+                        <segue destination="WSe-Vh-BzS" kind="presentation" identifier="goToApp" animates="NO" id="WFZ-V7-rJL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Bxn-eq-J9J">
+            <objects>
+                <viewController id="WSe-Vh-BzS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TvM-46-SGr"/>
+                        <viewControllerLayoutGuide type="bottom" id="2rn-bM-hUi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5ae-p8-sOF">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="signature" translatesAutoresizingMaskIntoConstraints="NO" id="bYN-1A-gpg">
+                                <rect key="frame" x="263" y="30" width="74" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="74" id="Olm-e6-XpP"/>
+                                    <constraint firstAttribute="height" constant="26" id="dsP-nd-4gy"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.33725490196078434" green="0.41568627450980394" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="bYN-1A-gpg" firstAttribute="top" secondItem="TvM-46-SGr" secondAttribute="bottom" constant="10" id="E4y-ZQ-HcW"/>
+                            <constraint firstAttribute="centerX" secondItem="bYN-1A-gpg" secondAttribute="centerX" id="IW3-DW-Wwn"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9xG-vW-89S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1104" y="387"/>
         </scene>
     </scenes>
     <resources>
