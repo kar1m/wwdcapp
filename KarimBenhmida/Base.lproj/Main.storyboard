@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -38,10 +39,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="Bxn-eq-J9J">
             <objects>
-                <viewController id="WSe-Vh-BzS" sceneMemberID="viewController">
+                <viewController id="WSe-Vh-BzS" customClass="MainViewController" customModule="KarimBenhmida" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TvM-46-SGr"/>
                         <viewControllerLayoutGuide type="bottom" id="2rn-bM-hUi"/>
@@ -57,17 +58,63 @@
                                     <constraint firstAttribute="height" constant="26" id="dsP-nd-4gy"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mG-tb-QBz">
+                                <rect key="frame" x="0.0" y="68" width="600" height="477"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.33725490196078434" green="0.41568627450980394" blue="0.5607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bYN-1A-gpg" firstAttribute="top" secondItem="TvM-46-SGr" secondAttribute="bottom" constant="10" id="E4y-ZQ-HcW"/>
                             <constraint firstAttribute="centerX" secondItem="bYN-1A-gpg" secondAttribute="centerX" id="IW3-DW-Wwn"/>
+                            <constraint firstItem="3mG-tb-QBz" firstAttribute="top" secondItem="bYN-1A-gpg" secondAttribute="bottom" constant="12" id="SBI-wI-DjF"/>
+                            <constraint firstItem="2rn-bM-hUi" firstAttribute="top" secondItem="3mG-tb-QBz" secondAttribute="bottom" constant="55" id="ZeC-Fi-vd3"/>
+                            <constraint firstItem="3mG-tb-QBz" firstAttribute="leading" secondItem="5ae-p8-sOF" secondAttribute="leadingMargin" constant="-16" id="uVs-qV-g5a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3mG-tb-QBz" secondAttribute="trailing" constant="-16" id="zoK-V3-2Lh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="containerView" destination="3mG-tb-QBz" id="pwj-o0-n0E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xG-vW-89S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1104" y="387"/>
+            <point key="canvasLocation" x="1104" y="372"/>
+        </scene>
+        <!--Projects View Controller-->
+        <scene sceneID="4h5-BB-qtP">
+            <objects>
+                <tableViewController storyboardIdentifier="projectsViewController" id="eoH-oU-tum" customClass="ProjectsViewController" customModule="KarimBenhmida" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GmH-XK-0S0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.33725490200000002" green="0.41568627450000001" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="projectCell" id="IJX-AZ-MT1">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IJX-AZ-MT1" id="eiv-71-Ka1">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQA-xo-5K9">
+                                            <rect key="frame" x="16" y="11" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.33725490200000002" green="0.41568627450000001" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="eoH-oU-tum" id="7QN-3p-l3L"/>
+                            <outlet property="delegate" destination="eoH-oU-tum" id="hxu-Gc-ome"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u94-dv-wBn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1104" y="1158"/>
         </scene>
     </scenes>
     <resources>
