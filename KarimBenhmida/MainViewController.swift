@@ -8,12 +8,14 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var containerView: UIView!
     var didLayoutSubviewsOnce = false
     var viewControllers : Array<UIViewController> = []
     let overlayView = UIView()
+    let swipeGestureRecognizer = UIPanGestureRecognizer()
+    var originalFrame = CGRectZero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,8 @@ class MainViewController: UIViewController {
         overlayView.backgroundColor = UIColor(red: 86/255, green: 106/255, blue: 143/255, alpha: 1)
         
         view.addSubview(overlayView)
+        
+        initSwipeGestureRecognizer()
         
     }
     
@@ -42,7 +46,7 @@ class MainViewController: UIViewController {
         self.containerView.layer.mask = gradient;
         
         if !didLayoutSubviewsOnce {
-            
+            //originalFrame = over
             var projectsVC = storyboard!.instantiateViewControllerWithIdentifier("projectsViewController") as! ProjectsViewController
             viewControllers.append(projectsVC)
             projectsVC.view.frame = containerView.bounds
@@ -61,6 +65,35 @@ class MainViewController: UIViewController {
         }, completion: { (value: Bool) in
             self.overlayView.removeFromSuperview()
         })
+    }
+    
+    func initSwipeGestureRecognizer() {
+        swipeGestureRecognizer.addTarget(self, action: "swipeGestureHandler:")
+        swipeGestureRecognizer.delegate = self;
+        
+        containerView.addGestureRecognizer(swipeGestureRecognizer)
+    }
+    
+    func swipeGestureHandler(sender:UIPanGestureRecognizer){
+        
+        var translation = sender.translationInView(self.view).x
+        
+        let viewToTranslate = viewControllers[0].view
+        
+        viewToTranslate.frame = CGRectOffset(containerView.bounds, translation, 0)
+        
+        if translation > 0
+        {
+            // Right swipe
+            //println("Right swipe")
+        }
+        else
+        {
+            // Left swipe
+        }
+        
+        
+        
     }
     
 
