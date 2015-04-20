@@ -13,9 +13,19 @@ class MainViewController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     var didLayoutSubviewsOnce = false
     var viewControllers : Array<UIViewController> = []
+    let overlayView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenRect = UIScreen.mainScreen().bounds;
+        let screenWidth = screenRect.size.width;
+        let screenHeight = screenRect.size.height;
+        
+        overlayView.frame = CGRectMake(0, 60, screenWidth, screenHeight-60)
+        overlayView.backgroundColor = UIColor(red: 86/255, green: 106/255, blue: 143/255, alpha: 1)
+        
+        view.addSubview(overlayView)
         
     }
     
@@ -38,11 +48,19 @@ class MainViewController: UIViewController {
             projectsVC.view.frame = containerView.bounds
             containerView.addSubview(projectsVC.view)
             
-//            var tableView = UITableView(frame: containerView.bounds)
-//            containerView.addSubview(tableView)
         }
         
         didLayoutSubviewsOnce = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animateWithDuration(0.4, animations: {
+            self.overlayView.layer.opacity = 0.0;
+        }, completion: { (value: Bool) in
+            self.overlayView.removeFromSuperview()
+        })
     }
     
 
