@@ -123,6 +123,11 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         
     }
     
+    @IBAction func didTapTabBarButton(sender: UIButton) {
+        println("YO \(scrollManager.increment++)")
+        //pageViewController.setViewControllers([viewControllerAtIndex(sender.tag)!], direction:1, animated: true, completion: nil)
+    }
+    
     // MARK: UIScrollView Delegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

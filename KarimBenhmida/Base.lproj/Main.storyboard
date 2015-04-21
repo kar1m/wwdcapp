@@ -84,9 +84,22 @@
                                                     <constraint firstAttribute="height" constant="21" id="ZzZ-fK-ETb"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-5Q-tIa">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
+                                                <state key="normal">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapTabBarButton:" destination="WSe-Vh-BzS" eventType="touchUpInside" id="FcP-IK-ItE"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="m7k-5Q-tIa" secondAttribute="trailing" id="1Ds-aX-RVs"/>
+                                            <constraint firstItem="m7k-5Q-tIa" firstAttribute="leading" secondItem="FAN-ir-gXS" secondAttribute="leading" id="FsG-HV-Raq"/>
+                                            <constraint firstItem="m7k-5Q-tIa" firstAttribute="top" secondItem="FAN-ir-gXS" secondAttribute="top" id="HRs-js-FLF"/>
+                                            <constraint firstAttribute="bottom" secondItem="m7k-5Q-tIa" secondAttribute="bottom" id="LQ7-jN-s51"/>
                                             <constraint firstAttribute="bottom" secondItem="w8a-wQ-hof" secondAttribute="bottom" constant="6" id="Yoa-Cv-zxv"/>
                                             <constraint firstAttribute="centerX" secondItem="TBZ-tV-V5T" secondAttribute="centerX" id="aoi-Bq-qFK"/>
                                             <constraint firstAttribute="trailing" secondItem="w8a-wQ-hof" secondAttribute="trailing" constant="8" id="fo5-7e-m7N"/>
@@ -94,7 +107,7 @@
                                             <constraint firstItem="w8a-wQ-hof" firstAttribute="top" secondItem="TBZ-tV-V5T" secondAttribute="bottom" constant="2" id="qgi-5t-3Gh"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCR-rm-dgU">
+                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCR-rm-dgU">
                                         <rect key="frame" x="300" y="0.0" width="150" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="78k-lK-rH6">
@@ -113,17 +126,30 @@
                                                     <constraint firstAttribute="height" constant="21" id="ffs-er-Ysa"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l7I-cj-big">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
+                                                <state key="normal">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapTabBarButton:" destination="WSe-Vh-BzS" eventType="touchUpInside" id="0WX-pY-RFc"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="l7I-cj-big" firstAttribute="top" secondItem="bCR-rm-dgU" secondAttribute="top" id="20C-HV-fB5"/>
+                                            <constraint firstAttribute="trailing" secondItem="l7I-cj-big" secondAttribute="trailing" id="JHt-f1-VDX"/>
                                             <constraint firstItem="78k-lK-rH6" firstAttribute="leading" secondItem="bCR-rm-dgU" secondAttribute="leading" constant="8" id="KOi-uI-YM0"/>
                                             <constraint firstAttribute="centerX" secondItem="me9-h1-Tdo" secondAttribute="centerX" id="T6s-aD-QRc"/>
                                             <constraint firstAttribute="trailing" secondItem="78k-lK-rH6" secondAttribute="trailing" constant="8" id="UTC-yk-ErK"/>
+                                            <constraint firstAttribute="bottom" secondItem="l7I-cj-big" secondAttribute="bottom" id="ckG-Uh-Tku"/>
                                             <constraint firstAttribute="bottom" secondItem="78k-lK-rH6" secondAttribute="bottom" constant="6" id="eEF-HT-64s"/>
+                                            <constraint firstItem="l7I-cj-big" firstAttribute="leading" secondItem="bCR-rm-dgU" secondAttribute="leading" id="eRc-Xa-odd"/>
                                             <constraint firstItem="78k-lK-rH6" firstAttribute="top" secondItem="me9-h1-Tdo" secondAttribute="bottom" constant="2" id="zb2-i4-jxU"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2P7-6j-YpS">
+                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2P7-6j-YpS">
                                         <rect key="frame" x="450" y="0.0" width="150" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yz4-ME-rhG">
@@ -142,17 +168,30 @@
                                                     <constraint firstAttribute="width" constant="22" id="ejL-K6-WtW"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4O-X7-u3Y">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
+                                                <state key="normal">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapTabBarButton:" destination="WSe-Vh-BzS" eventType="touchUpInside" id="KsA-Zw-eJS"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Yz4-ME-rhG" firstAttribute="top" secondItem="ng3-eQ-JMd" secondAttribute="bottom" constant="2" id="0pp-dA-lvW"/>
                                             <constraint firstItem="Yz4-ME-rhG" firstAttribute="leading" secondItem="2P7-6j-YpS" secondAttribute="leading" constant="8" id="9Yj-Uk-iVp"/>
                                             <constraint firstAttribute="trailing" secondItem="Yz4-ME-rhG" secondAttribute="trailing" constant="8" id="Meq-S2-QGa"/>
+                                            <constraint firstItem="W4O-X7-u3Y" firstAttribute="leading" secondItem="2P7-6j-YpS" secondAttribute="leading" id="NYB-t9-gCl"/>
+                                            <constraint firstAttribute="bottom" secondItem="W4O-X7-u3Y" secondAttribute="bottom" id="Rtg-Ev-EIX"/>
                                             <constraint firstAttribute="bottom" secondItem="Yz4-ME-rhG" secondAttribute="bottom" constant="6" id="Y2c-8A-inx"/>
                                             <constraint firstAttribute="centerX" secondItem="ng3-eQ-JMd" secondAttribute="centerX" id="Y3m-C0-YRC"/>
+                                            <constraint firstAttribute="trailing" secondItem="W4O-X7-u3Y" secondAttribute="trailing" id="v5Z-xX-yvt"/>
+                                            <constraint firstItem="W4O-X7-u3Y" firstAttribute="top" secondItem="2P7-6j-YpS" secondAttribute="top" id="zTo-Vu-X6B"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rw9-Dm-VD9">
+                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rw9-Dm-VD9">
                                         <rect key="frame" x="150" y="0.0" width="150" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bvR-Fl-tqW">
@@ -171,14 +210,27 @@
                                                     <constraint firstAttribute="width" constant="21" id="b62-z1-pUN"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbX-D0-0A6">
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="60"/>
+                                                <state key="normal">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapTabBarButton:" destination="WSe-Vh-BzS" eventType="touchUpInside" id="6zt-Kn-WSb"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="RbX-D0-0A6" secondAttribute="bottom" id="DFp-QP-Fvn"/>
                                             <constraint firstAttribute="centerX" secondItem="fO7-EK-mWt" secondAttribute="centerX" id="INq-9L-UrW"/>
                                             <constraint firstAttribute="bottom" secondItem="bvR-Fl-tqW" secondAttribute="bottom" constant="6" id="Jnc-CA-evx"/>
                                             <constraint firstAttribute="trailing" secondItem="bvR-Fl-tqW" secondAttribute="trailing" constant="8" id="Rqa-Vl-EYa"/>
+                                            <constraint firstAttribute="trailing" secondItem="RbX-D0-0A6" secondAttribute="trailing" id="a6u-QW-WKe"/>
                                             <constraint firstItem="bvR-Fl-tqW" firstAttribute="leading" secondItem="Rw9-Dm-VD9" secondAttribute="leading" constant="8" id="aeS-8a-7d7"/>
+                                            <constraint firstItem="RbX-D0-0A6" firstAttribute="leading" secondItem="Rw9-Dm-VD9" secondAttribute="leading" id="dvD-mf-Ik9"/>
                                             <constraint firstItem="bvR-Fl-tqW" firstAttribute="top" secondItem="fO7-EK-mWt" secondAttribute="bottom" constant="2" id="ixR-Ko-gOq"/>
+                                            <constraint firstItem="RbX-D0-0A6" firstAttribute="top" secondItem="Rw9-Dm-VD9" secondAttribute="top" id="ksT-ZY-5RK"/>
                                         </constraints>
                                     </view>
                                 </subviews>
