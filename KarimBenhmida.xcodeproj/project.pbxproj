@@ -10,6 +10,8 @@
 		67A4351A130EF789D9BC441C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D91879509CDDE93CB23EECF /* libPods.a */; };
 		8A4E45861AE6ABC70069E6A2 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45851AE6ABC70069E6A2 /* Globals.swift */; };
 		8A4E458A1AE6BB0B0069E6A2 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */; };
+		8A4E45921AE6C5C80069E6A2 /* KBTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45911AE6C5C80069E6A2 /* KBTabBar.swift */; };
+		8A4E45941AE6C5F90069E6A2 /* KBTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45931AE6C5F90069E6A2 /* KBTabBarItem.swift */; };
 		8A97D1D21AE43D030083CF51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A97D1D11AE43D030083CF51 /* AppDelegate.swift */; };
 		8A97D1D41AE43D030083CF51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A97D1D31AE43D030083CF51 /* ViewController.swift */; };
 		8A97D1D71AE43D030083CF51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A97D1D51AE43D030083CF51 /* Main.storyboard */; };
@@ -36,6 +38,8 @@
 		6D04329A6E4F8786451CCBEE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8A4E45851AE6ABC70069E6A2 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		8A4E45911AE6C5C80069E6A2 /* KBTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KBTabBar.swift; sourceTree = "<group>"; };
+		8A4E45931AE6C5F90069E6A2 /* KBTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KBTabBarItem.swift; sourceTree = "<group>"; };
 		8A97D1CC1AE43D030083CF51 /* KarimBenhmida.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarimBenhmida.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A97D1D01AE43D030083CF51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A97D1D11AE43D030083CF51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +91,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8A4E458E1AE6C4E10069E6A2 /* KBTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				8A4E45911AE6C5C80069E6A2 /* KBTabBar.swift */,
+				8A4E45931AE6C5F90069E6A2 /* KBTabBarItem.swift */,
+			);
+			name = KBTabBar;
+			sourceTree = "<group>";
+		};
 		8A97D1C31AE43D030083CF51 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +123,7 @@
 		8A97D1CE1AE43D030083CF51 /* KarimBenhmida */ = {
 			isa = PBXGroup;
 			children = (
+				8A4E458E1AE6C4E10069E6A2 /* KBTabBar */,
 				8A97D1D11AE43D030083CF51 /* AppDelegate.swift */,
 				8A97D1D31AE43D030083CF51 /* ViewController.swift */,
 				8AF8C6621AE4662800A70443 /* MainViewController.swift */,
@@ -290,7 +304,9 @@
 				8A97D1D41AE43D030083CF51 /* ViewController.swift in Sources */,
 				8A4E458A1AE6BB0B0069E6A2 /* ArrayExtension.swift in Sources */,
 				8A4E45861AE6ABC70069E6A2 /* Globals.swift in Sources */,
+				8A4E45941AE6C5F90069E6A2 /* KBTabBarItem.swift in Sources */,
 				8A97D1D21AE43D030083CF51 /* AppDelegate.swift in Sources */,
+				8A4E45921AE6C5C80069E6A2 /* KBTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

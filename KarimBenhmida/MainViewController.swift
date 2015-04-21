@@ -15,6 +15,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     var didLayoutSubviewsOnce = false
     let overlayView = UIView()
     var tabBarRect : UIView!
+    var tabBarIcons = [UIImageView]()
+    var tabBarLabels = [UILabel]()
+    
+    let tabBarMenuColor = UIColor(red: 167/255, green: 181/255, blue: 207/255, alpha: 1.0)
     
     // ------------------------- Controllers --------------------------
     var viewControllers = [UIViewController?](count: 4, repeatedValue: nil)
@@ -44,9 +48,11 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         // Tabbar rect
         tabBarRect = UIView(frame: CGRectMake(0, Globals.screenHeight-3.5, Globals.screenWidth/4, 3.5))
         tabBarRect.backgroundColor = UIColor.whiteColor()
-        
         view.addSubview(tabBarRect)
         
+        configureTabBar()
+        
+        //var testColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: 0.25)
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,6 +92,37 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         })
     }
     
+    // MARK: TabBar Config
+    
+    @IBOutlet weak var tabBarIcon1: UIImageView!
+    @IBOutlet weak var tabBarIcon2: UIImageView!
+    @IBOutlet weak var tabBarIcon3: UIImageView!
+    @IBOutlet weak var tabBarIcon4: UIImageView!
+    
+    @IBOutlet weak var tabBarTitle1: UILabel!
+    @IBOutlet weak var tabBarTitle2: UILabel!
+    @IBOutlet weak var tabBarTitle3: UILabel!
+    @IBOutlet weak var tabBarTitle4: UILabel!
+    
+    func configureTabBar() {
+        tabBarIcons = [tabBarIcon1, tabBarIcon2, tabBarIcon3, tabBarIcon4]
+        tabBarLabels = [tabBarTitle1, tabBarTitle2, tabBarTitle3, tabBarTitle4]
+        
+        for (index,imageView) in enumerate(tabBarIcons) {
+            imageView.image = imageView.image?.imageWithRenderingMode(.AlwaysTemplate)
+            
+            if index == 0 {
+                imageView.tintColor = UIColor.whiteColor()
+                tabBarLabels[index].textColor = UIColor.whiteColor()
+            }
+            else {
+                imageView.tintColor = tabBarMenuColor
+                tabBarLabels[index].textColor = tabBarMenuColor
+            }
+        }
+        
+    }
+    
     // MARK: UIScrollView Delegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -97,12 +134,24 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         }
         
         scrollManager.scrollSum = xOffset+scrollManager.offsetCorrection
-        println("\(++scrollManager.increment) \(scrollManager.scrollSum)")
+        //println("\(++scrollManager.increment) \(scrollManager.scrollSum)")
         
         // Updating the frame
         var translatedFrame = tabBarRect.frame
         translatedFrame.origin.x = scrollManager.scrollSum/4
         tabBarRect.frame = translatedFrame
+        
+        for (index,imageView) in enumerate(tabBarIcons) {
+            let distance = fabs(imageView.center.x+CGFloat(index)*Globals.screenWidth/4 - tabBarRect.center.x)
+            if distance > Globals.screenWidth/4 {
+                imageView.tintColor = tabBarMenuColor
+                tabBarLabels[index].textColor = tabBarMenuColor
+            }
+            else {
+                imageView.tintColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
+                tabBarLabels[index].textColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
+            }
+        }
         
         scrollManager.previousXOffset = xOffset
     }
