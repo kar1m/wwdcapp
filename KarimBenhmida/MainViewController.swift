@@ -22,6 +22,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     
     // ------------------------- Controllers --------------------------
     var viewControllers = [UIViewController?](count: 4, repeatedValue: nil)
+    var currentViewController : UIViewController!
     var pageViewController : UIPageViewController!
     
     // ------------------------ Scroll manager ------------------------
@@ -30,6 +31,9 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         
         var previousXOffset = CGFloat(0)
         var offsetCorrection = CGFloat(0)
+        
+        var multiplicator = 1
+        var previousMultiplicator = 0
         
         var increment = 0 // for debugging purposes
     }
@@ -73,6 +77,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
             
             pageViewController.view.frame = containerView.bounds
             pageViewController.setViewControllers([projectsVC], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+            currentViewController = projectsVC
             
             self.addChildViewController(pageViewController)
             containerView.addSubview(pageViewController.view)
@@ -125,7 +130,33 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     
     @IBAction func didTapTabBarButton(sender: UIButton) {
         println("YO \(scrollManager.increment++)")
-        //pageViewController.setViewControllers([viewControllerAtIndex(sender.tag)!], direction:1, animated: true, completion: nil)
+        
+        var index = viewControllers.find {$0 == self.currentViewController}!
+        var direction : UIPageViewControllerNavigationDirection!
+        
+        if sender.tag-index == 0 {
+            return
+        }
+        
+        if sender.tag-index > 0 {
+            direction = UIPageViewControllerNavigationDirection.Forward
+        }
+        else {
+            direction = UIPageViewControllerNavigationDirection.Reverse
+        }
+        
+        let difference = abs(sender.tag-index)
+        
+        scrollManager.multiplicator = difference
+        pageViewController.setViewControllers([viewControllerAtIndex(sender.tag)!], direction: direction, animated: true, completion: { (Bool) -> Void in
+            self.scrollManager.previousMultiplicator += sender.tag-index-1
+            self.scrollManager.multiplicator = 1
+        })
+        
+//        pageViewController.transitionFromViewController(self.currentViewController, toViewController: viewControllerAtIndex(sender.tag)!, duration: 0.6, options: nil, animations:nil, completion: nil)
+        
+//        pageViewController.setViewControllers([viewControllerAtIndex(sender.tag)!], direction:direction, animated: true, completion: nil)
+        currentViewController = viewControllerAtIndex(sender.tag)!
     }
     
     // MARK: UIScrollView Delegate
@@ -143,7 +174,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         
         // Updating the frame
         var translatedFrame = tabBarRect.frame
-        translatedFrame.origin.x = scrollManager.scrollSum/4
+        translatedFrame.origin.x = (CGFloat(scrollManager.previousMultiplicator)*Globals.screenWidth/4)+(scrollManager.scrollSum*CGFloat(scrollManager.multiplicator))/4
         tabBarRect.frame = translatedFrame
         
         for (index,imageView) in enumerate(tabBarIcons) {
@@ -227,7 +258,9 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     }
     
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        
+        if completed {
+            currentViewController = pageViewController.viewControllers[0] as! UIViewController
+        }
     }
 
 }
