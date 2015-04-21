@@ -53,45 +53,71 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         
     }
     
-    var shouldUpdateTabBarRectPosition = false
+    var secondScroll = false
+    
     var scrollSum = CGFloat(0)
+    var onDragBeginScrollSum = CGFloat(0)
+    var offsetCorrection = CGFloat(0)
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         scrollViewIsDragging = true
-        if smallestDistance(tabBarRect.frame.origin.x) == CGFloat(0.0) {
-            tabBarRectOriginalFrame = tabBarRect.frame
-            shouldUpdateTabBarRectPosition = false
+        
+        if smallestDistance(tabBarRect.frame.origin.x) == 0.0 {
+            secondScroll = false
+            onDragBeginScrollSum = scrollSum
+            offsetCorrection = 0.0
         }
         else {
-            shouldUpdateTabBarRectPosition = true
-            scrollSum = tabBarRect.frame.origin.x
+            secondScroll = true
+            //println("STARTED SECOND SCROLL")
         }
     }
     
+    var previousXOffset = CGFloat(0)
+    var increment = 0
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        println(scrollView.contentOffset.x)
+        println("\(++increment) \(scrollView.contentOffset.x-screenWidth)")
         
         let xOffset = scrollView.contentOffset.x - screenWidth
         
-        if shouldUpdateTabBarRectPosition {
-            tabBarRect.frame = CGRectMake(scrollSum+xOffset/4, tabBarRect.frame.origin.y, tabBarRect.frame.size.width, tabBarRect.frame.size.height)
-//            if xOffset >= CGFloat(0.0) {
-//                tabBarRectOriginalFrame = CGRectOffset(tabBarRectOriginalFrame, -screenWidth/40, 0)
-//            }
-//            else {
-//                tabBarRectOriginalFrame = CGRectOffset(tabBarRectOriginalFrame, screenWidth/40, 0)
-//            }
+        if xOffset == 0 && !scrollViewIsDragging {
+            // Snaping the tabBarRect to the grid
+            scrollSum = tabBarRect.frame.origin.x + smallestDistance(tabBarRect.frame.origin.x)
         }
         else {
-            if xOffset == 0 && !scrollViewIsDragging {
-                var distance = smallestDistance(tabBarRect.frame.origin.x)
-                tabBarRect.frame = CGRectOffset(tabBarRect.frame, distance, 0)
-            }
-            else {
-                tabBarRect.frame = CGRectOffset(tabBarRectOriginalFrame, xOffset/4, 0)
+//            if secondScroll {
+//                if xOffset > screenWidth {
+//                    scrollSum = xOffset/4
+//                }
+//                else {
+//                    scrollSum = onDragBeginScrollSum+xOffset/4
+//                }
+//                //scrollSum = xOffset/4
+//            }
+//            else {
+//                scrollSum = onDragBeginScrollSum+xOffset/4
+//            }
+            
+            if secondScroll {
+                let offsetDifference = fabs(previousXOffset-xOffset)
                 
+                if offsetDifference > screenWidth/2 {
+                    offsetCorrection += screenWidth/4
+                }
             }
+            
+            scrollSum = onDragBeginScrollSum+offsetCorrection+xOffset/4
         }
+        
+        //println(scrollSum)
+        
+        // Updating the frame
+        var translatedFrame = tabBarRect.frame
+        translatedFrame.origin.x = scrollSum
+        tabBarRect.frame = translatedFrame
+        
+        previousXOffset = xOffset
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
