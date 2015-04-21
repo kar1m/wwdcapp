@@ -9,8 +9,6 @@
 import UIKit
 
 class ProjectsViewController: UITableViewController {
-
-    var pageIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()

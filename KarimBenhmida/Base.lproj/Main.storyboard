@@ -84,7 +84,7 @@
         <!--Projects View Controller-->
         <scene sceneID="4h5-BB-qtP">
             <objects>
-                <tableViewController storyboardIdentifier="projectsViewController" id="eoH-oU-tum" customClass="ProjectsViewController" customModule="KarimBenhmida" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="KBViewController0" id="eoH-oU-tum" customClass="ProjectsViewController" customModule="KarimBenhmida" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="GmH-XK-0S0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

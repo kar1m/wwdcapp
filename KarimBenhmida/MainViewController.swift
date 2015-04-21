@@ -10,95 +10,90 @@ import UIKit
 
 class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-    let screenWidth = UIScreen.mainScreen().bounds.size.width
-    let screenHeight = UIScreen.mainScreen().bounds.size.height
-
+    // ------------------------------ UI ------------------------------
     @IBOutlet weak var containerView: UIView!
     var didLayoutSubviewsOnce = false
-    var viewControllers : Array<UIViewController> = []
     let overlayView = UIView()
-    let swipeGestureRecognizer = UIPanGestureRecognizer()
-    var originalFrame = CGRectZero
-    
-    var scrollViewIsDragging = false
-    
     var tabBarRect : UIView!
-    var tabBarRectOriginalFrame : CGRect!
     
+    // ------------------------- Controllers --------------------------
+    var viewControllers = [UIViewController?](count: 4, repeatedValue: nil)
     var pageViewController : UIPageViewController!
+    
+    // ------------------------ Scroll manager ------------------------
+    struct ScrollManager {
+        var scrollSum = CGFloat(0) // Total scrolled
+        
+        var previousXOffset = CGFloat(0)
+        var offsetCorrection = CGFloat(0)
+        
+        var increment = 0 // for debugging purposes
+    }
+    var scrollManager = ScrollManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        overlayView.frame = CGRectMake(0, 60, screenWidth, screenHeight-60)
+        // Overlay view for fadeIn animation
+        overlayView.frame = CGRectMake(0, 60, Globals.screenWidth, Globals.screenHeight-60)
         overlayView.backgroundColor = UIColor(red: 86/255, green: 106/255, blue: 143/255, alpha: 1)
-        
         view.addSubview(overlayView)
         
-        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-        pageViewController.delegate = self
-        pageViewController.dataSource = self
-        
-        for v in pageViewController.view.subviews{
-            if v.isKindOfClass(UIScrollView){
-                (v as! UIScrollView).delegate = self
-            }
-        }
+        initPageViewController()
         
         // Tabbar rect
-        tabBarRect = UIView(frame: CGRectMake(0, screenHeight-3.5, screenWidth/4, 3.5))
+        tabBarRect = UIView(frame: CGRectMake(0, Globals.screenHeight-3.5, Globals.screenWidth/4, 3.5))
         tabBarRect.backgroundColor = UIColor.whiteColor()
         
         view.addSubview(tabBarRect)
         
     }
     
-//    var secondScroll = false
-//    
-//    var scrollSum = CGFloat(0)
-//    var onDragBeginScrollSum = CGFloat(0)
-//    var offsetCorrection = CGFloat(0)
-//    var previousXOffset = CGFloat(0)
-//    var increment = 0
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    struct ScrollManager {
-        var scrollSum = CGFloat(0) // Total scrolled
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        var previousXOffset = CGFloat(0)
-        var offsetCorrection = CGFloat(0)
-        var scrollViewIsDragging = false
+        // Adding top and bottom gradient to containerView
+        let gradient = CAGradientLayer()
+        let gradientHeight : CGFloat = 20.0
+        gradient.frame = containerView.bounds;
+        gradient.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor, UIColor.blackColor().CGColor, UIColor.clearColor().CGColor];
+        gradient.locations = [0.0, gradientHeight/containerView.bounds.size.height, CGFloat(1.0)-gradientHeight/containerView.bounds.size.height, 1.0];
         
-         var increment = 0 // for debugging purposes
-    }
-    var scrollManager = ScrollManager()
-    
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        scrollManager.scrollViewIsDragging = true
+        self.containerView.layer.mask = gradient;
         
-        if smallestDistance(scrollManager.previousXOffset) == 0.0 {
+        
+        if !didLayoutSubviewsOnce {
+            var projectsVC = viewControllerAtIndex(0)!
             
-        }
-        else {
-            println("SECOND SCROLL")
+            pageViewController.view.frame = containerView.bounds
+            pageViewController.setViewControllers([projectsVC], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+            
+            self.addChildViewController(pageViewController)
+            containerView.addSubview(pageViewController.view)
+            self.pageViewController.didMoveToParentViewController(self)
+            
+            didLayoutSubviewsOnce = true
         }
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animateWithDuration(0.4, animations: {
+            self.overlayView.layer.opacity = 0.0;
+            }, completion: { (value: Bool) in
+                self.overlayView.removeFromSuperview()
+        })
+    }
+    
+    // MARK: UIScrollView Delegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let xOffset = scrollView.contentOffset.x - screenWidth
+        let xOffset = scrollView.contentOffset.x - Globals.screenWidth
         
         let offsetDifference = fabs(scrollManager.previousXOffset-xOffset)
-        if offsetDifference > screenWidth/2 {
-            println("PREV \(scrollManager.previousXOffset)")
-            scrollManager.offsetCorrection += scrollManager.previousXOffset-(scrollManager.previousXOffset%(screenWidth/4))
+        if offsetDifference > Globals.screenWidth/2 {
+            scrollManager.offsetCorrection += scrollManager.previousXOffset-(scrollManager.previousXOffset%(Globals.screenWidth/4))
         }
         
         scrollManager.scrollSum = xOffset+scrollManager.offsetCorrection
@@ -112,38 +107,25 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         scrollManager.previousXOffset = xOffset
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        scrollViewIsDragging = false
-    }
+    // MARK: UIPageViewController Init + Data Source
     
-    
-    
-    
-    
-    
-    
-    
-    func smallestDistance(point : CGFloat) -> CGFloat {
+    func initPageViewController() {
+        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        pageViewController.delegate = self
+        pageViewController.dataSource = self
         
-        // Calculating closest distance
-        var smallest = screenWidth
-        var distance = screenWidth
-        for i in 0..<4 {
-            let difference = fabs((screenWidth/4)*CGFloat(i)-point)
-            if difference <= smallest {
-                smallest = difference
-                distance = (screenWidth/4)*CGFloat(i)-point
+        for v in pageViewController.view.subviews{
+            if v.isKindOfClass(UIScrollView){
+                (v as! UIScrollView).delegate = self
             }
         }
-        
-        return distance
     }
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as! ProjectsViewController).pageIndex!
+        var index = viewControllers.find {$0 == viewController}!
         index++
-        if(index >= 4){
+        if(index >= viewControllers.count){
             return nil
         }
         return self.viewControllerAtIndex(index)
@@ -152,7 +134,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as! ProjectsViewController).pageIndex!
+        var index = viewControllers.find {$0 == viewController}!
         if(index <= 0){
             return nil
         }
@@ -162,20 +144,25 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     }
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {
-//        if index >= self.viewControllers.count {
-//            return nil
-//        }
-        
-        if index >= 4 {
+        if index >= viewControllers.count {
             return nil
         }
-        let pageContentViewController = self.storyboard?.instantiateViewControllerWithIdentifier("projectsViewController") as! ProjectsViewController
-        pageContentViewController.pageIndex = index
+        
+        var viewControllerAtCurrentIndex : UIViewController!
+        
+        if viewControllers[index] == nil {
+            viewControllerAtCurrentIndex = self.storyboard?.instantiateViewControllerWithIdentifier("KBViewController"+String(0)) as! UIViewController
+            
+            viewControllers[index] = viewControllerAtCurrentIndex
+        }
+        else {
+            viewControllerAtCurrentIndex = viewControllers[index]
+        }
 
-        return pageContentViewController
+        return viewControllerAtCurrentIndex
     }
     
-
+    // MARK: UIPageViewController Delegate
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
         return 0
@@ -188,91 +175,5 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
         
     }
-    
-    
-    
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        let gradient = CAGradientLayer()
-        let gradientHeight : CGFloat = 20.0
-        gradient.frame = containerView.bounds;
-        gradient.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor, UIColor.blackColor().CGColor, UIColor.clearColor().CGColor];
-        gradient.locations = [0.0, gradientHeight/containerView.bounds.size.height, CGFloat(1.0)-gradientHeight/containerView.bounds.size.height, 1.0];
-        
-        
-        self.containerView.layer.mask = gradient;
-        
-        if !didLayoutSubviewsOnce {
-            //originalFrame = over
-            var projectsVC = storyboard!.instantiateViewControllerWithIdentifier("projectsViewController") as! ProjectsViewController
-            viewControllers.append(projectsVC)
-            projectsVC.pageIndex = 0
-//            projectsVC.view.frame = containerView.bounds
-//            containerView.addSubview(projectsVC.view)
-            
-            pageViewController.view.frame = containerView.bounds
-            pageViewController.setViewControllers([projectsVC], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
-            
-            self.addChildViewController(pageViewController)
-            containerView.addSubview(pageViewController.view)
-            self.pageViewController.didMoveToParentViewController(self)
-            
-            
-        }
-        
-        didLayoutSubviewsOnce = true
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        UIView.animateWithDuration(0.4, animations: {
-            self.overlayView.layer.opacity = 0.0;
-        }, completion: { (value: Bool) in
-            self.overlayView.removeFromSuperview()
-        })
-    }
-    
-    func initSwipeGestureRecognizer() {
-//        swipeGestureRecognizer.addTarget(self, action: "swipeGestureHandler:")
-//        swipeGestureRecognizer.delegate = self;
-//        
-//        containerView.addGestureRecognizer(swipeGestureRecognizer)
-    }
-    
-    func swipeGestureHandler(sender:UIPanGestureRecognizer){
-        
-        var translation = sender.translationInView(self.view).x
-        
-        let viewToTranslate = viewControllers[0].view
-        
-        viewToTranslate.frame = CGRectOffset(containerView.bounds, translation, 0)
-        
-        if translation > 0
-        {
-            // Right swipe
-            //println("Right swipe")
-        }
-        else
-        {
-            // Left swipe
-        }
-        
-        
-        
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		67A4351A130EF789D9BC441C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D91879509CDDE93CB23EECF /* libPods.a */; };
+		8A4E45861AE6ABC70069E6A2 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45851AE6ABC70069E6A2 /* Globals.swift */; };
+		8A4E458A1AE6BB0B0069E6A2 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */; };
 		8A97D1D21AE43D030083CF51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A97D1D11AE43D030083CF51 /* AppDelegate.swift */; };
 		8A97D1D41AE43D030083CF51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A97D1D31AE43D030083CF51 /* ViewController.swift */; };
 		8A97D1D71AE43D030083CF51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A97D1D51AE43D030083CF51 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 		1D91879509CDDE93CB23EECF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DADE5CFAD026E97AFA9E4C6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6D04329A6E4F8786451CCBEE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8A4E45851AE6ABC70069E6A2 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		8A97D1CC1AE43D030083CF51 /* KarimBenhmida.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarimBenhmida.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A97D1D01AE43D030083CF51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A97D1D11AE43D030083CF51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				8A97D1DA1AE43D030083CF51 /* LaunchScreen.xib */,
 				8A97D1CF1AE43D030083CF51 /* Supporting Files */,
 				8A97D1F11AE44ADC0083CF51 /* BridgingHeader.h */,
+				8A4E45851AE6ABC70069E6A2 /* Globals.swift */,
+				8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */,
 			);
 			path = KarimBenhmida;
 			sourceTree = "<group>";
@@ -282,6 +288,8 @@
 				8AF8C6651AE46D4D00A70443 /* ProjectsViewController.swift in Sources */,
 				8AF8C6631AE4662800A70443 /* MainViewController.swift in Sources */,
 				8A97D1D41AE43D030083CF51 /* ViewController.swift in Sources */,
+				8A4E458A1AE6BB0B0069E6A2 /* ArrayExtension.swift in Sources */,
+				8A4E45861AE6ABC70069E6A2 /* Globals.swift in Sources */,
 				8A97D1D21AE43D030083CF51 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
