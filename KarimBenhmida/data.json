@@ -31,27 +31,56 @@
   "skills":
   [
     {
-      "name": "Skill 1",
+      "name": "Software development",
       "subskills":
       [
-        "subskill 1",
-        "subskill 2"
+        "Test-driven development",
+        "Continuous integration",
+        "Version control",
+        "MVC design pattern"
       ]
     },
     {
-      "name": "Skill 2",
+      "name": "iOS app development",
       "subskills":
       [
-        "subskill 1",
-        "subskill 2"
+        "Objective-C and Swift",
+        "UIKit",
+        "Auto Layout",
+        "Core Data"
       ]
     },
     {
-      "name": "Skill 3",
+      "name": "Web front-end",
       "subskills":
       [
-        "subskill 1",
-        "subskill 2"
+        "HTML5/CSS3",
+        "jQuery & Angular.js"
+      ]
+    },
+    {
+      "name": "Web back-end",
+      "subskills":
+      [
+        "Javascript/Node.js",
+        "MySQL & MongoDB",
+        "Cloud hosting"
+      ]
+    },
+    {
+      "name": "Product design",
+      "subskills":
+      [
+        "UI design (with Photoshop and Sketch)",
+        "UX design"
+      ]
+    },
+    {
+      "name": "Programming",
+      "subskills":
+      [
+        "C/C++",
+        "Java"
       ]
     }
   ]
