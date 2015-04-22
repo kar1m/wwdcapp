@@ -14,7 +14,9 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var containerView: UIView!
     var didLayoutSubviewsOnce = false
     let overlayView = UIView()
-    var tabBarRect : UIView!
+    //var tabBarRect : UIView!
+    
+    @IBOutlet weak var tabBarRect: UIView!
     var tabBarIcons = [UIImageView]()
     var tabBarLabels = [UILabel]()
     
@@ -29,7 +31,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         // Overlay view for fadeIn animation
-        overlayView.frame = CGRectMake(0, 60, Globals.screenWidth, Globals.screenHeight-60)
+        overlayView.frame = CGRectMake(0, 60, self.view.frame.width, Globals.screenHeight-60)
         overlayView.backgroundColor = UIColor(red: 86/255, green: 106/255, blue: 143/255, alpha: 1)
         view.addSubview(overlayView)
         
@@ -48,9 +50,9 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         
         self.containerView.layer.mask = gradient;
         
-        
+        initScrollView()
         if !didLayoutSubviewsOnce {
-            initScrollView()
+            
             didLayoutSubviewsOnce = true
         }
     }
@@ -80,9 +82,9 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     func configureTabBar() {
         
         // Tabbar rect
-        tabBarRect = UIView(frame: CGRectMake(0, Globals.screenHeight-3.5, Globals.screenWidth/4, 3.5))
-        tabBarRect.backgroundColor = UIColor.whiteColor()
-        view.addSubview(tabBarRect)
+//        tabBarRect = UIView(frame: CGRectMake(0, Globals.screenHeight-3, self.view.frame.width/4, 3))
+//        tabBarRect.backgroundColor = UIColor.whiteColor()
+//        view.addSubview(tabBarRect)
         
         tabBarIcons = [tabBarIcon1, tabBarIcon2, tabBarIcon3, tabBarIcon4]
         tabBarLabels = [tabBarTitle1, tabBarTitle2, tabBarTitle3, tabBarTitle4]
@@ -103,8 +105,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func didTapTabBarButton(sender: UIButton) {
-        
-        scrollView.setContentOffset(CGPointMake(CGFloat(sender.tag)*Globals.screenWidth, 0), animated: true)
+        //println("YOYOYOYOYOYOYOYOYOYOYOYO \(CGFloat(sender.tag)*self.view.frame.width)")
+        scrollView.setContentOffset(CGPointMake(CGFloat(sender.tag)*self.scrollView.frame.size.width, 0), animated: true)
         updateScrollToTop(sender.tag)
         
     }
@@ -127,13 +129,16 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
             frame.size = self.scrollView.frame.size
             
-            var subView = viewControllerAtIndex(index)!.view as! UITableView
+            var subView = viewControllerAtIndex(index)!.view as UIView
             
-            if index == 0 {
-                subView.scrollsToTop = true
-            }
-            else {
-                subView.scrollsToTop = false
+            if subView.isKindOfClass(UITableView) {
+                var currentTableView = subView as! UITableView
+                if index == 0 {
+                    currentTableView.scrollsToTop = true
+                }
+                else {
+                    currentTableView.scrollsToTop = false
+                }
             }
             
             subView.frame = frame
@@ -171,7 +176,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         var viewControllerAtCurrentIndex : UIViewController!
         
         if viewControllers[index] == nil {
-            viewControllerAtCurrentIndex = self.storyboard?.instantiateViewControllerWithIdentifier("KBViewController"+String(0)) as! UIViewController
+            viewControllerAtCurrentIndex = self.storyboard?.instantiateViewControllerWithIdentifier("KBViewController"+String(index)) as! UIViewController
             
             viewControllers[index] = viewControllerAtCurrentIndex
         }
@@ -185,6 +190,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     // MARK: UIScrollView Delegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        println(scrollView.contentOffset.x)
         
         // Updating the frame
         var translatedFrame = tabBarRect.frame
@@ -192,20 +198,20 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         tabBarRect.frame = translatedFrame
         
         // Updating the scrollToTop property
-        if scrollView.contentOffset.x%Globals.screenWidth == 0 {
-            let tag = Int(scrollView.contentOffset.x/Globals.screenWidth)
+        if scrollView.contentOffset.x%self.view.frame.width == 0 {
+            let tag = Int(scrollView.contentOffset.x/self.view.frame.width)
             updateScrollToTop(tag)
         }
 
         for (index,imageView) in enumerate(tabBarIcons) {
-            let distance = fabs(imageView.center.x+CGFloat(index)*Globals.screenWidth/4 - tabBarRect.center.x)
-            if distance > Globals.screenWidth/4 {
+            let distance = fabs(imageView.center.x+CGFloat(index)*self.view.frame.width/4 - tabBarRect.center.x)
+            if distance > self.view.frame.width/4 {
                 imageView.tintColor = tabBarMenuColor
                 tabBarLabels[index].textColor = tabBarMenuColor
             }
             else {
-                imageView.tintColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
-                tabBarLabels[index].textColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
+                imageView.tintColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(self.view.frame.width/4))
+                tabBarLabels[index].textColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(self.view.frame.width/4))
             }
         }
         
