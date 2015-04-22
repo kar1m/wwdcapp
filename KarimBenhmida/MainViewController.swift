@@ -103,7 +103,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func didTapTabBarButton(sender: UIButton) {
+        
         scrollView.setContentOffset(CGPointMake(CGFloat(sender.tag)*Globals.screenWidth, 0), animated: true)
+        updateScrollToTop(sender.tag)
+        
     }
     
     // MARK: Scroll View
@@ -117,13 +120,22 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.scrollsToTop = false
         
         for index in 0..<viewControllers.count {
             
             frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
             frame.size = self.scrollView.frame.size
-        
-            var subView = viewControllerAtIndex(index)!.view
+            
+            var subView = viewControllerAtIndex(index)!.view as! UITableView
+            
+            if index == 0 {
+                subView.scrollsToTop = true
+            }
+            else {
+                subView.scrollsToTop = false
+            }
+            
             subView.frame = frame
             //subView.backgroundColor = colors[index]
             self.scrollView.addSubview(subView)
@@ -132,6 +144,24 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width*CGFloat(viewControllers.count), scrollView.frame.size.height)
         
         self.containerView.addSubview(scrollView)
+    }
+    
+    func updateScrollToTop(tag: Int) {
+        for index in 0..<viewControllers.count {
+            
+            let currentView = viewControllers[index]!.view
+            
+            if currentView.isKindOfClass(UITableView) {
+                var currentTableView = currentView as! UITableView
+                
+                if index == tag {
+                    currentTableView.scrollsToTop = true
+                }
+                else {
+                    currentTableView.scrollsToTop = false
+                }
+            }
+        }
     }
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {
@@ -161,6 +191,12 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         var translatedFrame = tabBarRect.frame
         translatedFrame.origin.x = scrollView.contentOffset.x/4
         tabBarRect.frame = translatedFrame
+        
+        // Updating the scrollToTop property
+        if scrollView.contentOffset.x%Globals.screenWidth == 0 {
+            let tag = Int(scrollView.contentOffset.x/Globals.screenWidth)
+            updateScrollToTop(tag)
+        }
 
         for (index,imageView) in enumerate(tabBarIcons) {
             let distance = fabs(imageView.center.x+CGFloat(index)*Globals.screenWidth/4 - tabBarRect.center.x)
