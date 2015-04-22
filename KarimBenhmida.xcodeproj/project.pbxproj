@@ -10,11 +10,11 @@
 		67A4351A130EF789D9BC441C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D91879509CDDE93CB23EECF /* libPods.a */; };
 		8A4E45861AE6ABC70069E6A2 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45851AE6ABC70069E6A2 /* Globals.swift */; };
 		8A4E458A1AE6BB0B0069E6A2 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */; };
-		8A4E45921AE6C5C80069E6A2 /* KBTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45911AE6C5C80069E6A2 /* KBTabBar.swift */; };
-		8A4E45941AE6C5F90069E6A2 /* KBTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45931AE6C5F90069E6A2 /* KBTabBarItem.swift */; };
 		8A4E45971AE7EBFC0069E6A2 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45961AE7EBFC0069E6A2 /* ProjectTableViewCell.swift */; };
 		8A4E45991AE7ED280069E6A2 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E45981AE7ED280069E6A2 /* UIColorExtension.swift */; };
 		8A4E459B1AE7FD970069E6A2 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 8A4E459A1AE7FD970069E6A2 /* data.json */; };
+		8A4E459E1AE8594B0069E6A2 /* SkillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E459D1AE8594B0069E6A2 /* SkillsViewController.swift */; };
+		8A4E45A01AE8596A0069E6A2 /* SkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4E459F1AE8596A0069E6A2 /* SkillTableViewCell.swift */; };
 		8A97D1D21AE43D030083CF51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A97D1D11AE43D030083CF51 /* AppDelegate.swift */; };
 		8A97D1D41AE43D030083CF51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A97D1D31AE43D030083CF51 /* ViewController.swift */; };
 		8A97D1D71AE43D030083CF51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A97D1D51AE43D030083CF51 /* Main.storyboard */; };
@@ -41,11 +41,11 @@
 		6D04329A6E4F8786451CCBEE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		8A4E45851AE6ABC70069E6A2 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
-		8A4E45911AE6C5C80069E6A2 /* KBTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KBTabBar.swift; sourceTree = "<group>"; };
-		8A4E45931AE6C5F90069E6A2 /* KBTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KBTabBarItem.swift; sourceTree = "<group>"; };
 		8A4E45961AE7EBFC0069E6A2 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		8A4E45981AE7ED280069E6A2 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8A4E459A1AE7FD970069E6A2 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		8A4E459D1AE8594B0069E6A2 /* SkillsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillsViewController.swift; sourceTree = "<group>"; };
+		8A4E459F1AE8596A0069E6A2 /* SkillTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkillTableViewCell.swift; sourceTree = "<group>"; };
 		8A97D1CC1AE43D030083CF51 /* KarimBenhmida.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KarimBenhmida.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A97D1D01AE43D030083CF51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A97D1D11AE43D030083CF51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,15 +97,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8A4E458E1AE6C4E10069E6A2 /* KBTabBar */ = {
-			isa = PBXGroup;
-			children = (
-				8A4E45911AE6C5C80069E6A2 /* KBTabBar.swift */,
-				8A4E45931AE6C5F90069E6A2 /* KBTabBarItem.swift */,
-			);
-			name = KBTabBar;
-			sourceTree = "<group>";
-		};
 		8A4E45951AE7EB1E0069E6A2 /* ProjectsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +104,15 @@
 				8A4E45961AE7EBFC0069E6A2 /* ProjectTableViewCell.swift */,
 			);
 			name = ProjectsViewController;
+			sourceTree = "<group>";
+		};
+		8A4E459C1AE859330069E6A2 /* SkillsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8A4E459D1AE8594B0069E6A2 /* SkillsViewController.swift */,
+				8A4E459F1AE8596A0069E6A2 /* SkillTableViewCell.swift */,
+			);
+			name = SkillsViewController;
 			sourceTree = "<group>";
 		};
 		8A97D1C31AE43D030083CF51 = {
@@ -139,7 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				8A4E45951AE7EB1E0069E6A2 /* ProjectsViewController */,
-				8A4E458E1AE6C4E10069E6A2 /* KBTabBar */,
+				8A4E459C1AE859330069E6A2 /* SkillsViewController */,
 				8A97D1D11AE43D030083CF51 /* AppDelegate.swift */,
 				8A97D1D31AE43D030083CF51 /* ViewController.swift */,
 				8AF8C6621AE4662800A70443 /* MainViewController.swift */,
@@ -318,15 +318,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8AF8C6651AE46D4D00A70443 /* ProjectsViewController.swift in Sources */,
+				8A4E45A01AE8596A0069E6A2 /* SkillTableViewCell.swift in Sources */,
 				8A4E45971AE7EBFC0069E6A2 /* ProjectTableViewCell.swift in Sources */,
 				8AF8C6631AE4662800A70443 /* MainViewController.swift in Sources */,
 				8A97D1D41AE43D030083CF51 /* ViewController.swift in Sources */,
+				8A4E459E1AE8594B0069E6A2 /* SkillsViewController.swift in Sources */,
 				8A4E458A1AE6BB0B0069E6A2 /* ArrayExtension.swift in Sources */,
 				8A4E45861AE6ABC70069E6A2 /* Globals.swift in Sources */,
-				8A4E45941AE6C5F90069E6A2 /* KBTabBarItem.swift in Sources */,
 				8A4E45991AE7ED280069E6A2 /* UIColorExtension.swift in Sources */,
 				8A97D1D21AE43D030083CF51 /* AppDelegate.swift in Sources */,
-				8A4E45921AE6C5C80069E6A2 /* KBTabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

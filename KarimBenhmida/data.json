@@ -27,5 +27,32 @@
       "name": "SquashPro",
       "description": "A 3D trajectory simulator for a squash ball popper.\nDeveloped in Java with OpenGL."
     }
+  ],
+  "skills":
+  [
+    {
+      "name": "Skill 1",
+      "subskills":
+      [
+        "subskill 1",
+        "subskill 2"
+      ]
+    },
+    {
+      "name": "Skill 2",
+      "subskills":
+      [
+        "subskill 1",
+        "subskill 2"
+      ]
+    },
+    {
+      "name": "Skill 3",
+      "subskills":
+      [
+        "subskill 1",
+        "subskill 2"
+      ]
+    }
   ]
 }

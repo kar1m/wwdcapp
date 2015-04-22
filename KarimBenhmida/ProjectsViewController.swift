@@ -24,7 +24,7 @@ class ProjectsViewController: UITableViewController {
         let path = NSBundle.mainBundle().pathForResource("data", ofType: "json")!
         let jsonData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil) as NSData!
         var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
-        projectsData = jsonResult["projects"] as! [(NSDictionary)]
+        projectsData = jsonResult["projects"] as! [NSDictionary]
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,11 +62,6 @@ class ProjectsViewController: UITableViewController {
                 projectsImages[projectName!] = NSNumber(bool: false)
             }
         }
-//        cell.leftButton.userInteractionEnabled = false
-//        cell.rightButton.userInteractionEnabled = false
-//        
-//        cell.leftButton.layer.opacity = 0
-//        cell.rightButton.layer.opacity = 0
         
         cell.centeredButton.userInteractionEnabled = false
         cell.centeredButton.layer.opacity = 0
