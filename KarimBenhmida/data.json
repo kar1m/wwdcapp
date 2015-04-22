@@ -4,27 +4,28 @@
     {
       "name": "Showlist",
       "description": "A simple & intuitive iPhone app to help people keep track of their favorite TV shows. Developed with a friend in Objective-C and Parse.com for the backend.",
-      "link": "http://www.showlistapp.com",
-      "appstore-link": "https://itunes.apple.com/us/app/showlist/id693290740?mt=8"
+      "link-web": "http://www.showlistapp.com",
+      "link-tag": "showlistapp.com",
+      "link-appstore": "https://itunes.apple.com/us/app/showlist/id693290740?mt=8"
     },
     {
       "name": "ChatAround",
-      "description": "An app that lets you talk to people around you freely. Developed in Obj-C/Swift. The backend uses Node.js, MongoDB and WebSockets."
+      "description": "An app that lets you talk to people around you freely. Developed in Obj-C/Swift. The backend uses Node.js, MongoDB and WebSockets.",
+      "link-tag": "Coming soon to the App Store"
     },
     {
       "name": "MyContacts.io",
       "description": "iPhone/iPad Contact Manager with advanced social and CRM functions. Developed as part of my last summer internship.",
-      "link": "http://mycontacts.io"
+      "link-web": "http://mycontacts.io",
+      "link-tag": "mycontacts.io"
     },
     {
       "name": "Liveboard",
-      "description": "A real-time dashboard gathering data from multiple sources",
-      "link": "http://mycontacts.io"
+      "description": "A real-time dashboard gathering data from multiple sources"
     },
     {
       "name": "SquashPro",
-      "description": "A 3D trajectory simulator app for a squash ball popper. Developed in Java with OpenGL.",
-      "link": "http://mycontacts.io"
+      "description": "A 3D trajectory simulator app for a squash ball popper. Developed in Java with OpenGL."
     }
   ]
 }

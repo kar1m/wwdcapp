@@ -105,10 +105,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @IBAction func didTapTabBarButton(sender: UIButton) {
-        //println("YOYOYOYOYOYOYOYOYOYOYOYO \(CGFloat(sender.tag)*self.view.frame.width)")
         scrollView.setContentOffset(CGPointMake(CGFloat(sender.tag)*self.scrollView.frame.size.width, 0), animated: true)
         updateScrollToTop(sender.tag)
-        
     }
     
     // MARK: Scroll View
@@ -190,8 +188,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     // MARK: UIScrollView Delegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        println(scrollView.contentOffset.x)
-        
+
         // Updating the frame
         var translatedFrame = tabBarRect.frame
         translatedFrame.origin.x = scrollView.contentOffset.x/4

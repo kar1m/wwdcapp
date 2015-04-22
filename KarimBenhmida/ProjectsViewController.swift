@@ -19,6 +19,7 @@ class ProjectsViewController: UITableViewController {
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 425.0;
+        self.tableView.backgroundView = nil
 
         let path = NSBundle.mainBundle().pathForResource("data", ofType: "json")!
         let jsonData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil) as NSData!
@@ -51,6 +52,7 @@ class ProjectsViewController: UITableViewController {
         cell.projectTitle.text = projectName
         cell.projectDescription.text = projectsData[indexPath.row]["description"] as? String
         
+        // Setting project image
         if projectsImages[projectName!] == nil {
             let projectImage = UIImage(named: "screen_"+projectName!.lowercaseString)
             if let image = projectImage {
@@ -60,27 +62,57 @@ class ProjectsViewController: UITableViewController {
                 projectsImages[projectName!] = NSNumber(bool: false)
             }
         }
+//        cell.leftButton.userInteractionEnabled = false
+//        cell.rightButton.userInteractionEnabled = false
+//        
+//        cell.leftButton.layer.opacity = 0
+//        cell.rightButton.layer.opacity = 0
+        
+        cell.centeredButton.userInteractionEnabled = false
+        cell.centeredButton.layer.opacity = 0
+        
+        // Setting project links
+        let projectWebLink = projectsData[indexPath.row]["link-web"] as? String
+        let projectAppStoreLink = projectsData[indexPath.row]["link-appstore"] as? String
+        let projectLinkTag = projectsData[indexPath.row]["link-tag"] as? String
+        
+        cell.buttonsViewHeight.constant = 41
+        cell.centeredButton.enabled = true
+        
+        cell.centeredButton.titleLabel!.font =  UIFont(name: "AvenirNext-Medium", size: 13)
+        
+        if projectWebLink != nil && projectLinkTag != nil && projectAppStoreLink != nil {
+            cell.enableButton(cell.leftButton)
+            cell.enableButton(cell.rightButton)
+            cell.disableButton(cell.centeredButton)
+            
+            cell.leftButton.setTitle(projectLinkTag, forState: .Normal)
+        }
+        else if projectWebLink != nil && projectLinkTag != nil {
+            cell.disableButton(cell.leftButton)
+            cell.disableButton(cell.rightButton)
+            cell.enableButton(cell.centeredButton)
+            
+            cell.centeredButton.setTitle(projectLinkTag, forState: .Normal)
+        }
+        else if projectLinkTag != nil {
+            cell.disableButton(cell.leftButton)
+            cell.disableButton(cell.rightButton)
+            cell.enableButton(cell.centeredButton)
+            
+            cell.centeredButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 13)
+            cell.centeredButton.setTitle(projectLinkTag, forState: .Normal)
+            cell.centeredButton.enabled = false
+        }
+        else {
+            cell.buttonsViewHeight.constant = 5
+            cell.disableButton(cell.leftButton)
+            cell.disableButton(cell.rightButton)
+            cell.disableButton(cell.centeredButton)
+        }
         
         cell.projectPicture.image = projectsImages[projectName!] as? UIImage
         
-//        if projectsImages[projectName!]!.isKindOfClass(UIImage) {
-//            cell.projectPicture.image = projectsImages[projectName!] as? UIImage
-//            cell.pictureTopConstraint.constant = 16
-//            //cell.pictureRightSpace.constant = 12
-//            cell.projectPicture.setTranslatesAutoresizingMaskIntoConstraints(false)
-//            
-//        }
-//        else {
-//            cell.pictureTopConstraint.constant = 0
-//            //cell.pictureRightSpace.constant = cell.containerView.frame.width-12
-//            cell.projectPicture.setTranslatesAutoresizingMaskIntoConstraints(true)
-//            var newFrame = cell.projectPicture.frame
-//            newFrame.size.height = 10
-//            cell.projectPicture.frame = newFrame;
-//            
-//        }
-        
-
         return cell
     }
 

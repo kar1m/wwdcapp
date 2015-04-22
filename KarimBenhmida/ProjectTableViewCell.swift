@@ -15,6 +15,12 @@ class ProjectTableViewCell: UITableViewCell {
     @IBOutlet weak var projectPicture: UIImageView!
     @IBOutlet weak var projectDescription: UILabel!
 
+    @IBOutlet weak var centeredButton: UIButton!
+    @IBOutlet weak var leftButton: UIButton!
+    @IBOutlet weak var rightButton: UIButton!
+    
+    @IBOutlet weak var buttonsViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var pictureRightSpace: NSLayoutConstraint!
     @IBOutlet weak var pictureTopConstraint: NSLayoutConstraint!
     
@@ -26,10 +32,14 @@ class ProjectTableViewCell: UITableViewCell {
         projectPicture.layer.masksToBounds = true
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func enableButton(button: UIButton) {
+        button.userInteractionEnabled = true
+        button.layer.opacity = 1
+    }
+    
+    func disableButton(button: UIButton) {
+        button.userInteractionEnabled = false
+        button.layer.opacity = 0
     }
 
 }
