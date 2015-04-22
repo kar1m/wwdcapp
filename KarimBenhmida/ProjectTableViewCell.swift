@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import StoreKit
 
-class ProjectTableViewCell: UITableViewCell {
+class ProjectTableViewCell: UITableViewCell, SKStoreProductViewControllerDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var projectTitle: UILabel!
@@ -28,6 +29,8 @@ class ProjectTableViewCell: UITableViewCell {
     var appStoreLink : String?
     var webLink : String?
     
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -44,8 +47,24 @@ class ProjectTableViewCell: UITableViewCell {
     
     @IBAction func openAppStoreLink() {
         if let existingAppStoreLink = appStoreLink {
-            UIApplication.sharedApplication().openURL(NSURL(string: existingAppStoreLink)!)
+            // Initialize Product View Controller
+            let storeProductViewController = SKStoreProductViewController()
+            
+            // Configure View Controller
+            storeProductViewController.delegate = self
+            storeProductViewController.loadProductWithParameters([SKStoreProductParameterITunesItemIdentifier:existingAppStoreLink], completionBlock: { (result, error) -> Void in
+                if error == nil {
+                    self.appDelegate.mainViewController!.presentViewController(storeProductViewController, animated: true, completion: nil)
+                }
+                else {
+                    UIApplication.sharedApplication().openURL(NSURL(string: "https://itunes.apple.com/us/app/showlist/id"+existingAppStoreLink)!)
+                }
+            })
         }
+    }
+    
+    func productViewControllerDidFinish(viewController: SKStoreProductViewController!) {
+        appDelegate.mainViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func enableButton(button: UIButton) {

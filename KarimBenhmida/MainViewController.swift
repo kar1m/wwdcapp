@@ -30,6 +30,9 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.mainViewController = self
+        
         // Overlay view for fadeIn animation
         overlayView.frame = CGRectMake(0, 60, self.view.frame.width, Globals.screenHeight-60)
         overlayView.backgroundColor = UIColor(red: 86/255, green: 106/255, blue: 143/255, alpha: 1)
