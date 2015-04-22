@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class MainViewController: UIViewController, UIScrollViewDelegate {
     
     // ------------------------------ UI ------------------------------
     @IBOutlet weak var containerView: UIView!
@@ -22,22 +22,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     
     // ------------------------- Controllers --------------------------
     var viewControllers = [UIViewController?](count: 4, repeatedValue: nil)
-    var currentViewController : UIViewController!
-    var pageViewController : UIPageViewController!
+    var scrollView = UIScrollView()
     
-    // ------------------------ Scroll manager ------------------------
-    struct ScrollManager {
-        var scrollSum = CGFloat(0) // Total scrolled
-        
-        var previousXOffset = CGFloat(0)
-        var offsetCorrection = CGFloat(0)
-        
-        var multiplicator = 1
-        var previousMultiplicator = 0
-        
-        var increment = 0 // for debugging purposes
-    }
-    var scrollManager = ScrollManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,16 +33,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         overlayView.backgroundColor = UIColor(red: 86/255, green: 106/255, blue: 143/255, alpha: 1)
         view.addSubview(overlayView)
         
-        initPageViewController()
-        
-        // Tabbar rect
-        tabBarRect = UIView(frame: CGRectMake(0, Globals.screenHeight-3.5, Globals.screenWidth/4, 3.5))
-        tabBarRect.backgroundColor = UIColor.whiteColor()
-        view.addSubview(tabBarRect)
-        
         configureTabBar()
-        
-        //var testColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: 0.25)
     }
     
     override func viewDidLayoutSubviews() {
@@ -73,16 +50,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         
         
         if !didLayoutSubviewsOnce {
-            var projectsVC = viewControllerAtIndex(0)!
-            
-            pageViewController.view.frame = containerView.bounds
-            pageViewController.setViewControllers([projectsVC], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
-            currentViewController = projectsVC
-            
-            self.addChildViewController(pageViewController)
-            containerView.addSubview(pageViewController.view)
-            self.pageViewController.didMoveToParentViewController(self)
-            
+            initScrollView()
             didLayoutSubviewsOnce = true
         }
     }
@@ -110,6 +78,12 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     @IBOutlet weak var tabBarTitle4: UILabel!
     
     func configureTabBar() {
+        
+        // Tabbar rect
+        tabBarRect = UIView(frame: CGRectMake(0, Globals.screenHeight-3.5, Globals.screenWidth/4, 3.5))
+        tabBarRect.backgroundColor = UIColor.whiteColor()
+        view.addSubview(tabBarRect)
+        
         tabBarIcons = [tabBarIcon1, tabBarIcon2, tabBarIcon3, tabBarIcon4]
         tabBarLabels = [tabBarTitle1, tabBarTitle2, tabBarTitle3, tabBarTitle4]
         
@@ -129,103 +103,35 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
     }
     
     @IBAction func didTapTabBarButton(sender: UIButton) {
-        println("YO \(scrollManager.increment++)")
-        
-        var index = viewControllers.find {$0 == self.currentViewController}!
-        var direction : UIPageViewControllerNavigationDirection!
-        
-        if sender.tag-index == 0 {
-            return
-        }
-        
-        if sender.tag-index > 0 {
-            direction = UIPageViewControllerNavigationDirection.Forward
-        }
-        else {
-            direction = UIPageViewControllerNavigationDirection.Reverse
-        }
-        
-        let difference = abs(sender.tag-index)
-        
-        scrollManager.multiplicator = difference
-        pageViewController.setViewControllers([viewControllerAtIndex(sender.tag)!], direction: direction, animated: true, completion: { (Bool) -> Void in
-            self.scrollManager.previousMultiplicator += sender.tag-index-1
-            self.scrollManager.multiplicator = 1
-        })
-        
-//        pageViewController.transitionFromViewController(self.currentViewController, toViewController: viewControllerAtIndex(sender.tag)!, duration: 0.6, options: nil, animations:nil, completion: nil)
-        
-//        pageViewController.setViewControllers([viewControllerAtIndex(sender.tag)!], direction:direction, animated: true, completion: nil)
-        currentViewController = viewControllerAtIndex(sender.tag)!
+        scrollView.setContentOffset(CGPointMake(CGFloat(sender.tag)*Globals.screenWidth, 0), animated: true)
     }
     
-    // MARK: UIScrollView Delegate
+    // MARK: Scroll View
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        let xOffset = scrollView.contentOffset.x - Globals.screenWidth
+    func initScrollView() {
         
-        let offsetDifference = fabs(scrollManager.previousXOffset-xOffset)
-        if offsetDifference > Globals.screenWidth/2 {
-            scrollManager.offsetCorrection += scrollManager.previousXOffset-(scrollManager.previousXOffset%(Globals.screenWidth/4))
+        var frame: CGRect = CGRectMake(0, 0, 0, 0)
+        
+        self.scrollView.pagingEnabled = true
+        scrollView.frame = containerView.bounds
+        scrollView.delegate = self
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        
+        for index in 0..<viewControllers.count {
+            
+            frame.origin.x = self.scrollView.frame.size.width * CGFloat(index)
+            frame.size = self.scrollView.frame.size
+        
+            var subView = viewControllerAtIndex(index)!.view
+            subView.frame = frame
+            //subView.backgroundColor = colors[index]
+            self.scrollView.addSubview(subView)
         }
         
-        scrollManager.scrollSum = xOffset+scrollManager.offsetCorrection
-        //println("\(++scrollManager.increment) \(scrollManager.scrollSum)")
+        self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width*CGFloat(viewControllers.count), scrollView.frame.size.height)
         
-        // Updating the frame
-        var translatedFrame = tabBarRect.frame
-        translatedFrame.origin.x = (CGFloat(scrollManager.previousMultiplicator)*Globals.screenWidth/4)+(scrollManager.scrollSum*CGFloat(scrollManager.multiplicator))/4
-        tabBarRect.frame = translatedFrame
-        
-        for (index,imageView) in enumerate(tabBarIcons) {
-            let distance = fabs(imageView.center.x+CGFloat(index)*Globals.screenWidth/4 - tabBarRect.center.x)
-            if distance > Globals.screenWidth/4 {
-                imageView.tintColor = tabBarMenuColor
-                tabBarLabels[index].textColor = tabBarMenuColor
-            }
-            else {
-                imageView.tintColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
-                tabBarLabels[index].textColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
-            }
-        }
-        
-        scrollManager.previousXOffset = xOffset
-    }
-    
-    // MARK: UIPageViewController Init + Data Source
-    
-    func initPageViewController() {
-        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-        pageViewController.delegate = self
-        pageViewController.dataSource = self
-        
-        for v in pageViewController.view.subviews{
-            if v.isKindOfClass(UIScrollView){
-                (v as! UIScrollView).delegate = self
-            }
-        }
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        
-        var index = viewControllers.find {$0 == viewController}!
-        index++
-        if(index >= viewControllers.count){
-            return nil
-        }
-        return self.viewControllerAtIndex(index)
-        
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        
-        var index = viewControllers.find {$0 == viewController}!
-        if(index <= 0){
-            return nil
-        }
-        index--
-        return self.viewControllerAtIndex(index)
-        
+        self.containerView.addSubview(scrollView)
     }
     
     func viewControllerAtIndex(index : Int) -> UIViewController? {
@@ -243,24 +149,31 @@ class MainViewController: UIViewController, UIScrollViewDelegate, UIPageViewCont
         else {
             viewControllerAtCurrentIndex = viewControllers[index]
         }
-
+        
         return viewControllerAtCurrentIndex
     }
     
-    // MARK: UIPageViewController Delegate
+    // MARK: UIScrollView Delegate
     
-    func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return 0
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [AnyObject]) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
         
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        if completed {
-            currentViewController = pageViewController.viewControllers[0] as! UIViewController
+        // Updating the frame
+        var translatedFrame = tabBarRect.frame
+        translatedFrame.origin.x = scrollView.contentOffset.x/4
+        tabBarRect.frame = translatedFrame
+
+        for (index,imageView) in enumerate(tabBarIcons) {
+            let distance = fabs(imageView.center.x+CGFloat(index)*Globals.screenWidth/4 - tabBarRect.center.x)
+            if distance > Globals.screenWidth/4 {
+                imageView.tintColor = tabBarMenuColor
+                tabBarLabels[index].textColor = tabBarMenuColor
+            }
+            else {
+                imageView.tintColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
+                tabBarLabels[index].textColor = Globals.colorBetween(UIColor.whiteColor(), andColor: tabBarMenuColor, atPercent: distance/(Globals.screenWidth/4))
+            }
         }
+        
     }
 
 }
