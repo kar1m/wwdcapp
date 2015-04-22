@@ -10,17 +10,20 @@ import UIKit
 
 class ProjectsViewController: UITableViewController {
     
+    var projectsData = [NSDictionary]()
+    var projectsImages = [String:AnyObject]()
+    var pictureOriginalHeight = CGFloat(0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 425.0;
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        let path = NSBundle.mainBundle().pathForResource("data", ofType: "json")!
+        let jsonData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil) as NSData!
+        var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
+        projectsData = jsonResult["projects"] as! [(NSDictionary)]
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,68 +34,54 @@ class ProjectsViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 5
+        return projectsData.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("projectCell", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCellWithIdentifier("projectCell", forIndexPath: indexPath) as! ProjectTableViewCell
+        
+        let projectName = projectsData[indexPath.row]["name"] as? String
+        
+        cell.projectTitle.text = projectName
+        cell.projectDescription.text = projectsData[indexPath.row]["description"] as? String
+        
+        if projectsImages[projectName!] == nil {
+            let projectImage = UIImage(named: "screen_"+projectName!.lowercaseString)
+            if let image = projectImage {
+                projectsImages[projectName!] = image
+            }
+            else {
+                projectsImages[projectName!] = NSNumber(bool: false)
+            }
+        }
+        
+        cell.projectPicture.image = projectsImages[projectName!] as? UIImage
+        
+//        if projectsImages[projectName!]!.isKindOfClass(UIImage) {
+//            cell.projectPicture.image = projectsImages[projectName!] as? UIImage
+//            cell.pictureTopConstraint.constant = 16
+//            //cell.pictureRightSpace.constant = 12
+//            cell.projectPicture.setTranslatesAutoresizingMaskIntoConstraints(false)
+//            
+//        }
+//        else {
+//            cell.pictureTopConstraint.constant = 0
+//            //cell.pictureRightSpace.constant = cell.containerView.frame.width-12
+//            cell.projectPicture.setTranslatesAutoresizingMaskIntoConstraints(true)
+//            var newFrame = cell.projectPicture.frame
+//            newFrame.size.height = 10
+//            cell.projectPicture.frame = newFrame;
+//            
+//        }
+        
 
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -10,8 +10,13 @@ import UIKit
 
 class ProjectTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var projectTitle: UILabel!
     @IBOutlet weak var projectPicture: UIImageView!
+    @IBOutlet weak var projectDescription: UILabel!
+
+    @IBOutlet weak var pictureRightSpace: NSLayoutConstraint!
+    @IBOutlet weak var pictureTopConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
