@@ -460,7 +460,7 @@
         <scene sceneID="fOq-Zw-kUp">
             <objects>
                 <tableViewController storyboardIdentifier="KBViewController1" id="x67-cK-Pbn" customClass="SkillsViewController" customModule="KarimBenhmida" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="106" sectionHeaderHeight="22" sectionFooterHeight="22" id="XTz-UJ-SFw">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="106" sectionHeaderHeight="22" sectionFooterHeight="22" id="XTz-UJ-SFw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
