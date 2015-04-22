@@ -12,6 +12,9 @@ class ProjectsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 425.0;
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -36,7 +39,7 @@ class ProjectsViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 30
+        return 5
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

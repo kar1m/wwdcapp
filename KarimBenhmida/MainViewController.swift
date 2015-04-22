@@ -41,7 +41,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         
         // Adding top and bottom gradient to containerView
         let gradient = CAGradientLayer()
-        let gradientHeight : CGFloat = 20.0
+        let gradientHeight : CGFloat = 2.5
         gradient.frame = containerView.bounds;
         gradient.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor, UIColor.blackColor().CGColor, UIColor.clearColor().CGColor];
         gradient.locations = [0.0, gradientHeight/containerView.bounds.size.height, CGFloat(1.0)-gradientHeight/containerView.bounds.size.height, 1.0];
@@ -137,7 +137,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
             }
             
             subView.frame = frame
-            //subView.backgroundColor = colors[index]
             self.scrollView.addSubview(subView)
         }
         
