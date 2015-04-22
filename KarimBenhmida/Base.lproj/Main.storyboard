@@ -351,6 +351,9 @@
                                                             </state>
                                                             <state key="selected" backgroundImage="selected"/>
                                                             <state key="highlighted" backgroundImage="selected"/>
+                                                            <connections>
+                                                                <action selector="openWebLink" destination="IJX-AZ-MT1" eventType="touchUpInside" id="yYg-1H-cFn"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIZ-kt-y7B">
                                                             <rect key="frame" x="0.0" y="0.0" width="295" height="41"/>
@@ -361,6 +364,9 @@
                                                             </state>
                                                             <state key="selected" backgroundImage="selected"/>
                                                             <state key="highlighted" backgroundImage="selected"/>
+                                                            <connections>
+                                                                <action selector="openWebLink" destination="IJX-AZ-MT1" eventType="touchUpInside" id="faw-jB-v3v"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CI-ip-UaV">
                                                             <rect key="frame" x="295" y="0.0" width="295" height="41"/>
@@ -370,6 +376,9 @@
                                                             </state>
                                                             <state key="selected" backgroundImage="selected"/>
                                                             <state key="highlighted" backgroundImage="selected"/>
+                                                            <connections>
+                                                                <action selector="openAppStoreLink" destination="IJX-AZ-MT1" eventType="touchUpInside" id="qcR-vc-eeb"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.96470588235294119" green="0.97254901960784312" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
@@ -535,7 +544,7 @@
         <image name="interests" width="23" height="21"/>
         <image name="projects" width="30" height="21"/>
         <image name="screen_showlist" width="400" height="300"/>
-        <image name="selected" width="13" height="12"/>
+        <image name="selected" width="12" height="12"/>
         <image name="signature" width="148" height="52"/>
         <image name="skills" width="21" height="21"/>
     </resources>

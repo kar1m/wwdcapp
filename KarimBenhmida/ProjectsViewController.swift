@@ -78,8 +78,10 @@ class ProjectsViewController: UITableViewController {
         
         cell.buttonsViewHeight.constant = 41
         cell.centeredButton.enabled = true
-        
         cell.centeredButton.titleLabel!.font =  UIFont(name: "AvenirNext-Medium", size: 13)
+        
+        cell.webLink = projectWebLink
+        cell.appStoreLink = projectAppStoreLink
         
         if projectWebLink != nil && projectLinkTag != nil && projectAppStoreLink != nil {
             cell.enableButton(cell.leftButton)

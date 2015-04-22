@@ -24,6 +24,10 @@ class ProjectTableViewCell: UITableViewCell {
     @IBOutlet weak var pictureRightSpace: NSLayoutConstraint!
     @IBOutlet weak var pictureTopConstraint: NSLayoutConstraint!
     
+    
+    var appStoreLink : String?
+    var webLink : String?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -32,6 +36,18 @@ class ProjectTableViewCell: UITableViewCell {
         projectPicture.layer.masksToBounds = true
     }
 
+    @IBAction func openWebLink() {
+        if let existingWebLink = webLink {
+            UIApplication.sharedApplication().openURL(NSURL(string: existingWebLink)!)
+        }
+    }
+    
+    @IBAction func openAppStoreLink() {
+        if let existingAppStoreLink = appStoreLink {
+            UIApplication.sharedApplication().openURL(NSURL(string: existingAppStoreLink)!)
+        }
+    }
+    
     func enableButton(button: UIButton) {
         button.userInteractionEnabled = true
         button.layer.opacity = 1
