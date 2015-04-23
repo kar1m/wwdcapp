@@ -69,7 +69,7 @@ class ProjectsViewController: UITableViewController {
         let projectAppStoreLink = projectsData[indexPath.row]["link-appstore"] as? String
         let projectLinkTag = projectsData[indexPath.row]["link-tag"] as? String
         
-        cell.buttonsViewHeight.constant = 41
+        //cell.buttonsViewHeight.constant = 41
         cell.centeredButton.enabled = true
         cell.centeredButton.titleLabel!.font =  UIFont(name: "AvenirNext-Medium", size: 13)
         
@@ -100,7 +100,7 @@ class ProjectsViewController: UITableViewController {
             cell.centeredButton.enabled = false
         }
         else {
-            cell.buttonsViewHeight.constant = 5
+            //cell.buttonsViewHeight.constant = 5
         }
         
         return cell

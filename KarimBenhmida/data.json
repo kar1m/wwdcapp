@@ -21,7 +21,8 @@
     },
     {
       "name": "Liveboard",
-      "description": "A real-time dashboard gathering data from multiple sources"
+      "description": "A real-time dashboard gathering data from multiple sources",
+      "link-tag": "Currently in private beta"
     },
     {
       "name": "SquashPro",
