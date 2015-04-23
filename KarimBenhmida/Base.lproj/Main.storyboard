@@ -287,6 +287,7 @@
                         <outlet property="tabBarIcon3" destination="me9-h1-Tdo" id="mKf-Te-n7e"/>
                         <outlet property="tabBarIcon4" destination="ng3-eQ-JMd" id="u1B-yM-uca"/>
                         <outlet property="tabBarRect" destination="idF-ye-ljN" id="lSO-im-Ptb"/>
+                        <outlet property="tabBarRectLeftConstraint" destination="8Qj-Ol-3VX" id="JVX-Nv-KLh"/>
                         <outlet property="tabBarTitle1" destination="w8a-wQ-hof" id="cGN-5R-M6e"/>
                         <outlet property="tabBarTitle2" destination="bvR-Fl-tqW" id="JFn-Vo-1fO"/>
                         <outlet property="tabBarTitle3" destination="78k-lK-rH6" id="lUL-FG-PgX"/>

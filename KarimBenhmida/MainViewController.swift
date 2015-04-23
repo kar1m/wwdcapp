@@ -12,11 +12,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     // ------------------------------ UI ------------------------------
     @IBOutlet weak var containerView: UIView!
-    var didLayoutSubviewsOnce = false
     let overlayView = UIView()
-    //var tabBarRect : UIView!
     
     @IBOutlet weak var tabBarRect: UIView!
+    @IBOutlet weak var tabBarRectLeftConstraint: NSLayoutConstraint!
     var tabBarIcons = [UIImageView]()
     var tabBarLabels = [UILabel]()
     
@@ -54,10 +53,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         self.containerView.layer.mask = gradient;
         
         initScrollView()
-        if !didLayoutSubviewsOnce {
-            
-            didLayoutSubviewsOnce = true
-        }
+        
+        tabBarRectLeftConstraint.constant = scrollView.contentOffset.x/4
     }
     
     override func viewDidAppear(animated: Bool) {
