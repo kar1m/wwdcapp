@@ -11,36 +11,34 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var appLogo: UIImageView!
+    var mainViewController: MainViewController?
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mainViewController = storyboard!.instantiateViewControllerWithIdentifier("mainViewController") as! MainViewController!
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        var test = NSEC_PER_SEC
-        
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+        UIView.animateWithDuration(0.5, delay: 0.8, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
             
-            var scaleAnimation = POPBasicAnimation(propertyNamed: kPOPViewScaleXY);
-            scaleAnimation.toValue = NSValue(CGPoint: CGPoint(x: 0.5, y: 0.5))
-            scaleAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-            scaleAnimation.duration = 0.5
-            self.appLogo.pop_addAnimation(scaleAnimation, forKey: "scaleAnimation")
+            // Logo transition
+            var logoFrame = self.appLogo.frame
+            let factor = CGFloat(2)
+            let wdiff: CGFloat = (logoFrame.size.width-(logoFrame.size.width/factor))/2
             
-            var frameAnimation = POPBasicAnimation(propertyNamed: kPOPLayerPosition)
-            frameAnimation.toValue = NSValue(CGPoint: CGPoint(x: self.appLogo.center.x, y: 43))
-            frameAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
-            frameAnimation.duration = 0.5
-            self.appLogo.layer.pop_addAnimation(frameAnimation, forKey: "frameAnimation")
+            logoFrame.size.height /= factor
+            logoFrame.size.width /= factor
+            logoFrame.origin.x += wdiff
+            logoFrame.origin.y = 30
             
-            frameAnimation.completionBlock = { (POPAnimation, Bool) -> Void in
-                self.performSegueWithIdentifier("goToApp", sender: self)
-            }
+            self.appLogo.frame = logoFrame
+            
+        }) { (success) -> Void in
+            self.presentViewController(self.mainViewController!, animated: false, completion: nil)
         }
-        
     }
     
 }

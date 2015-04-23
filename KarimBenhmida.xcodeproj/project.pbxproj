@@ -56,7 +56,6 @@
 		8A97D1E11AE43D030083CF51 /* KarimBenhmidaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KarimBenhmidaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A97D1E61AE43D030083CF51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8A97D1E71AE43D030083CF51 /* KarimBenhmidaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KarimBenhmidaTests.swift; sourceTree = "<group>"; };
-		8A97D1F11AE44ADC0083CF51 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		8AF8C6621AE4662800A70443 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8AF8C6641AE46D4D00A70443 /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +137,7 @@
 		8A97D1CE1AE43D030083CF51 /* KarimBenhmida */ = {
 			isa = PBXGroup;
 			children = (
+				8AA7D0B61AE91D4800575015 /* Extensions */,
 				8A4E45951AE7EB1E0069E6A2 /* ProjectsViewController */,
 				8A4E459C1AE859330069E6A2 /* SkillsViewController */,
 				8A97D1D11AE43D030083CF51 /* AppDelegate.swift */,
@@ -147,10 +147,7 @@
 				8A97D1D81AE43D030083CF51 /* Images.xcassets */,
 				8A97D1DA1AE43D030083CF51 /* LaunchScreen.xib */,
 				8A97D1CF1AE43D030083CF51 /* Supporting Files */,
-				8A97D1F11AE44ADC0083CF51 /* BridgingHeader.h */,
 				8A4E45851AE6ABC70069E6A2 /* Globals.swift */,
-				8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */,
-				8A4E45981AE7ED280069E6A2 /* UIColorExtension.swift */,
 			);
 			path = KarimBenhmida;
 			sourceTree = "<group>";
@@ -179,6 +176,15 @@
 				8A97D1E61AE43D030083CF51 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8AA7D0B61AE91D4800575015 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8A4E45891AE6BB0B0069E6A2 /* ArrayExtension.swift */,
+				8A4E45981AE7ED280069E6A2 /* UIColorExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -458,7 +464,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = KarimBenhmida/BridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -472,7 +478,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = KarimBenhmida/BridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

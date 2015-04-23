@@ -21,11 +21,14 @@
     },
     {
       "name": "Liveboard",
-      "description": "A real-time dashboard gathering data from multiple sources"
+      "description": "A real-time dashboard gathering data from multiple sources",
+      "link-tag": "Currently in private beta"
     },
     {
       "name": "SquashPro",
-      "description": "A 3D trajectory simulator for a squash ball popper.\nDeveloped in Java with OpenGL."
+      "description": "A 3D trajectory simulator for a squash ball popper.\nDeveloped in Java with OpenGL.",
+      "link-web": "https://github.com/takuyozora/g43g3/",
+      "link-tag": "Source code"
     }
   ],
   "skills":

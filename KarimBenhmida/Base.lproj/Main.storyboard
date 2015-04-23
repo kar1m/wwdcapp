@@ -43,7 +43,7 @@
         <!--Main View Controller-->
         <scene sceneID="Bxn-eq-J9J">
             <objects>
-                <viewController id="WSe-Vh-BzS" customClass="MainViewController" customModule="KarimBenhmida" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" id="WSe-Vh-BzS" customClass="MainViewController" customModule="KarimBenhmida" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TvM-46-SGr"/>
                         <viewControllerLayoutGuide type="bottom" id="2rn-bM-hUi"/>

@@ -84,11 +84,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     func configureTabBar() {
         
-        // Tabbar rect
-//        tabBarRect = UIView(frame: CGRectMake(0, Globals.screenHeight-3, self.view.frame.width/4, 3))
-//        tabBarRect.backgroundColor = UIColor.whiteColor()
-//        view.addSubview(tabBarRect)
-        
         tabBarIcons = [tabBarIcon1, tabBarIcon2, tabBarIcon3, tabBarIcon4]
         tabBarLabels = [tabBarTitle1, tabBarTitle2, tabBarTitle3, tabBarTitle4]
         
