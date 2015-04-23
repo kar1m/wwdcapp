@@ -790,7 +790,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="heD-1q-YDJ">
-                                                <rect key="frame" x="12" y="10" width="576" height="305"/>
+                                                <rect key="frame" x="12" y="8" width="576" height="305"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lD8-eM-MaS">
                                                         <rect key="frame" x="12" y="14" width="552" height="32"/>
@@ -819,13 +819,28 @@
                                                         <rect key="frame" x="12" y="54" width="552" height="237"/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
-                                                                <mutableString key="content">I’m currently studying in France for a Master’s degree in Computer Science.
-This summer, I will be joining Mozilla’s mobile team in San Francisco as an intern to work on Firefox for iOS.
+                                                                <string key="content">I’m currently studying in France for a Master’s degree in Computer Science.
+This summer, I will be joining </string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Regular"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" lineHeightMultiple="1"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="Mozilla">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="14" name="AvenirNext-Medium"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="5" lineHeightMultiple="1"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">’s mobile team in San Francisco as an intern to work on Firefox for iOS.
 
 I hope that this little app gave you a pretty good overview of my projects and skills, and as you might guess, I love designing and developing apps for iOS.
 
 I’ve also been following WWDC and other Apple keynotes for a few years now and it would be a unique opportunity for me to attend this year’s conference.
-Thanks for giving us, students, this opportunity.</mutableString>
+Thanks for giving us, students, this opportunity.</string>
                                                                 <attributes>
                                                                     <color key="NSColor" red="0.52549019607843139" green="0.52549019607843139" blue="0.52549019607843139" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <font key="NSFont" size="14" name="AvenirNext-Regular"/>
@@ -856,7 +871,7 @@ Thanks for giving us, students, this opportunity.</mutableString>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="heD-1q-YDJ" firstAttribute="top" secondItem="Kse-BM-Lmx" secondAttribute="top" constant="10" id="8AK-Tm-zvv"/>
+                                            <constraint firstItem="heD-1q-YDJ" firstAttribute="top" secondItem="Kse-BM-Lmx" secondAttribute="top" constant="8" id="8AK-Tm-zvv"/>
                                             <constraint firstItem="heD-1q-YDJ" firstAttribute="leading" secondItem="Kse-BM-Lmx" secondAttribute="leading" constant="12" id="lLq-Ks-Jux"/>
                                             <constraint firstAttribute="trailing" secondItem="heD-1q-YDJ" secondAttribute="trailing" constant="12" id="tZJ-9Q-hgI"/>
                                         </constraints>
