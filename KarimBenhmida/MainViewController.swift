@@ -21,10 +21,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     let tabBarMenuColor = UIColor(red: 167/255, green: 181/255, blue: 207/255, alpha: 1.0)
     
-    // ------------------------- Controllers --------------------------
-    var viewControllers = [UIViewController?](count: 4, repeatedValue: nil)
     var scrollView = UIScrollView()
     
+    // ------------------------- Controllers --------------------------
+    var viewControllers = [UIViewController?](count: 4, repeatedValue: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         gradient.frame = containerView.bounds;
         gradient.colors = [UIColor.clearColor().CGColor, UIColor.blackColor().CGColor, UIColor.blackColor().CGColor, UIColor.clearColor().CGColor];
         gradient.locations = [0.0, gradientHeight/containerView.bounds.size.height, CGFloat(1.0)-gradientHeight/containerView.bounds.size.height, 1.0];
-        
         self.containerView.layer.mask = gradient;
         
         initScrollView()

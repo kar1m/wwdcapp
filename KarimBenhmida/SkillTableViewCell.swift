@@ -12,9 +12,5 @@ class SkillTableViewCell: UITableViewCell {
 
     @IBOutlet weak var skillName: UILabel!
     @IBOutlet weak var skillsDetailsLabel: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+
 }

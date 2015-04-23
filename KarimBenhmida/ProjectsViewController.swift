@@ -25,11 +25,17 @@ class ProjectsViewController: UITableViewController {
         let jsonData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil) as NSData!
         var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
         projectsData = jsonResult["projects"] as! [NSDictionary]
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        for project in projectsData {
+            let projectName = project["name"] as! String
+            let projectImage = UIImage(named: "screen_"+projectName.lowercaseString)
+            if let image = projectImage {
+                projectsImages[projectName] = image
+            }
+            else {
+                projectsImages[projectName] = NSNumber(bool: false)
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -53,15 +59,7 @@ class ProjectsViewController: UITableViewController {
         cell.projectDescription.text = projectsData[indexPath.row]["description"] as? String
         
         // Setting project image
-        if projectsImages[projectName!] == nil {
-            let projectImage = UIImage(named: "screen_"+projectName!.lowercaseString)
-            if let image = projectImage {
-                projectsImages[projectName!] = image
-            }
-            else {
-                projectsImages[projectName!] = NSNumber(bool: false)
-            }
-        }
+        cell.projectPicture.image = projectsImages[projectName!] as? UIImage
         
         cell.centeredButton.userInteractionEnabled = false
         cell.centeredButton.layer.opacity = 0
@@ -78,23 +76,23 @@ class ProjectsViewController: UITableViewController {
         cell.webLink = projectWebLink
         cell.appStoreLink = projectAppStoreLink
         
+        // Restoring reusable cell to initial state
+        cell.disableButton(cell.leftButton)
+        cell.disableButton(cell.rightButton)
+        cell.disableButton(cell.centeredButton)
+        
         if projectWebLink != nil && projectLinkTag != nil && projectAppStoreLink != nil {
             cell.enableButton(cell.leftButton)
             cell.enableButton(cell.rightButton)
-            cell.disableButton(cell.centeredButton)
             
             cell.leftButton.setTitle(projectLinkTag, forState: .Normal)
         }
         else if projectWebLink != nil && projectLinkTag != nil {
-            cell.disableButton(cell.leftButton)
-            cell.disableButton(cell.rightButton)
             cell.enableButton(cell.centeredButton)
             
             cell.centeredButton.setTitle(projectLinkTag, forState: .Normal)
         }
         else if projectLinkTag != nil {
-            cell.disableButton(cell.leftButton)
-            cell.disableButton(cell.rightButton)
             cell.enableButton(cell.centeredButton)
             
             cell.centeredButton.titleLabel!.font =  UIFont(name: "AvenirNext-Regular", size: 13)
@@ -103,12 +101,7 @@ class ProjectsViewController: UITableViewController {
         }
         else {
             cell.buttonsViewHeight.constant = 5
-            cell.disableButton(cell.leftButton)
-            cell.disableButton(cell.rightButton)
-            cell.disableButton(cell.centeredButton)
         }
-        
-        cell.projectPicture.image = projectsImages[projectName!] as? UIImage
         
         return cell
     }

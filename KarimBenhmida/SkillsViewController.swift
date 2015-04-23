@@ -11,6 +11,7 @@ import UIKit
 class SkillsViewController: UITableViewController {
 
     var skillsData = [NSDictionary]()
+    var subSkillsData = [NSAttributedString]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +24,36 @@ class SkillsViewController: UITableViewController {
         let jsonData = NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe, error: nil) as NSData!
         var jsonResult: NSDictionary = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSDictionary
         skillsData = jsonResult["skills"] as! [NSDictionary]
+        
+        for skill in skillsData {
+            var skillText = ""
+            let subSkills = skill["subskills"] as! [String]
+            
+            for (index,subSkill) in enumerate(subSkills) {
+                skillText += subSkill
+                if index < subSkills.count-1 {
+                    skillText += "\n"
+                }
+            }
+            
+            var paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 5
+            
+            var attrString = NSMutableAttributedString(string: skillText)
+            attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
+            
+            subSkillsData.append(attrString)
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         return skillsData.count
     }
@@ -45,22 +64,8 @@ class SkillsViewController: UITableViewController {
         cell.skillName.text = skillsData[indexPath.row]["name"] as? String
         
         let subSkills = skillsData[indexPath.row]["subskills"] as! [String]
-
-        cell.skillsDetailsLabel.text = ""
-        for (index,skill) in enumerate(subSkills) {
-            cell.skillsDetailsLabel.text! += skill
-            if index < subSkills.count-1 {
-                cell.skillsDetailsLabel.text! += "\n"
-            }
-        }
         
-        var paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 5
-        
-        var attrString = NSMutableAttributedString(string: cell.skillsDetailsLabel.text!)
-        attrString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attrString.length))
-        
-        cell.skillsDetailsLabel.attributedText = attrString
+        cell.skillsDetailsLabel.attributedText = subSkillsData[indexPath.row]
 
         return cell
     }

@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Preloading the main view controller
         mainViewController = storyboard!.instantiateViewControllerWithIdentifier("mainViewController") as! MainViewController!
     }
     
