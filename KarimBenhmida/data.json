@@ -21,7 +21,7 @@
     },
     {
       "name": "Liveboard",
-      "description": "A real-time dashboard gathering data from multiple sources",
+      "description": "A real-time dashboard gathering data from multiple sources.\nTech stack: Angular.js, Node.js, MongoDB and WebSockets.",
       "link-tag": "Currently in private beta"
     },
     {
